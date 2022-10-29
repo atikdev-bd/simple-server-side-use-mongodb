@@ -18,11 +18,20 @@ app.get("/", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
+
+    
+    if(req.query.name){
+        const search = req.query.name
+        const filtered = users.filter(usr => usr.name.toLowerCase().indexOf(search) >=0)
+        res.send(filtered)
+    }else{
+        res.send(user)
+    }
   const user = req.body
   user.id = users.length +1
   users.push(user)
  
-  res.send(user)
+  
  
 });
 
